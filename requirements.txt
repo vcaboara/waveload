@@ -1,5 +1,3 @@
 build
 setuptools
 pre-commit
-pytest
-pytest-cov
