@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = ""
+
+[project]
+name = "waveload"
+version = "0.1.0"
+description = "A Python library to load Workrave historystats data into various databases."
+readme = ""
+requires-python = ">=3.7"
+authors = [
+{ name = "[Your Name]", email = "[Your Email]" },
+]
+license = { text = "MIT" }
+classifiers = [
+"Development Status :: 3 - Alpha",
+"Intended Audience :: Developers",
+"License :: OSI Approved :: MIT License",
+"Programming Language :: Python :: 3",
+"Programming Language :: Python :: 3.7",
+"Programming Language :: Python :: 3.8",
+"Programming Language :: Python :: 3.9",
+"Programming Language :: Python :: 3.10",
+"Programming Language :: Python :: 3.11",
+"Programming Language :: Python :: 3.12",
+"Topic :: Software Development :: Libraries",
+"Topic :: Utilities",
+]
+
+[project.optional-dependencies]
+dev = [
+"pytest",
+"coverage",
+"pytest-cov"
+]
+
+[tool.setuptools.packages]
+find = {}
+
