@@ -1,5 +1,10 @@
-import unittest
+import os
+import sys
 import sqlite3
+import unittest
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from waveload.database_adapters.sqlite_adapter import SQLiteAdapter
 
 class TestSQLiteAdapter(unittest.TestCase):
@@ -42,5 +47,3 @@ class TestSQLiteAdapter(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-
