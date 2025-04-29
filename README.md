@@ -4,7 +4,7 @@ A Python library to load Workrave historystats text data into various databases.
 
 ## Installation
 
-To install waveload, first ensure you have Python 3.12 or higher installed. Then, you can install it using pip:
+To install waveload, first ensure you have Python 3.11 or higher installed. Then, you can install it using pip:
 
 ```
 pip install waveload
@@ -38,7 +38,6 @@ finally:
 
 ## Contributing
 
-Contributions are welcome! 
+Contributions are welcome!
 
 Generated with Gemini 2.0 Flash
-

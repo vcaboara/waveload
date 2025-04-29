@@ -1,9 +1,15 @@
 ---
 services:
-  waveload_builder:
+  wb:
     build:
       context: .
       dockerfile: Dockerfile
-    image: waveload-builder:latest
-    volumes:
-      - .:/app
+    # No need for ports or volumes here for just building
+    # command: python -m waveload # Your application command
+
+  #coverage_export:
+  ce:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
