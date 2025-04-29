@@ -19,23 +19,28 @@ ENV PATH="/venv/bin:$PATH"
 # Install pip and upgrade
 RUN pip install --upgrade pip
 
-# Copy requirements and install dependencies
+# Install testing, coverage, linting, and formatting tools
+RUN pip install pytest pytest-cov coverage pylint autopep8
+
+# Copy project files (excluding tests)
 COPY requirements.txt .
-RUN pip install -r requirements.txt
-
 COPY pyproject.toml setup.py setup.cfg README.md ./
-RUN pip install -e .
-
 COPY waveload /app/waveload
 
-# Install pytest and coverage for testing
-RUN pip install pytest pytest-cov coverage
+# Run linting only on the waveload directory
+RUN pylint waveload
 
-# Run tests and generate coverage report
-RUN pytest --cov=waveload \
-	  --cov-report=xml:/app/coverage.xml \
-		--junitxml=/app/test_results.xml \
-		/app/waveload/tests
+# Run code formatting (apply changes directly to all .py files in waveload)
+RUN find /app/waveload -name "*.py" -exec autopep8 --in-place {} +
+
+# Install your module in editable mode
+RUN pip install -e .
+
+# Copy the tests directory for running tests
+COPY tests /app/tests
+
+# Run tests and generate reports
+RUN pytest --cov=waveload --cov-report=xml:/app/coverage.xml --junitxml=/app/test_results.xml /app/tests
 
 # Stage 2: Final minimal Alpine image
 FROM python:3.11-alpine3.19 AS final
@@ -49,7 +54,7 @@ RUN apk add --no-cache libffi-dev openssl
 COPY --from=builder /venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-# Copy the application code from the builder stage
+# Copy only the application code (waveload) from the builder stage
 COPY --from=builder /app/waveload /app/waveload
 
 ENTRYPOINT ["python"]

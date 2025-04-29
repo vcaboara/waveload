@@ -52,7 +52,7 @@ class TestHistorystatsLoader(unittest.TestCase):
         loader = HistorystatsLoader("sqlite", config)
         file_path = "test_historystats.txt"
         loader.load_from_file(file_path)
-        MockOpen.assert_called_once_with(file_path, 'r')
+        MockOpen.assert_called_once_with(file_path, 'r', encoding='utf-8')
         MockLoadFromContent.assert_called_once_with(["Date: 2025-04-28 Some data\n", "Another line"])
 
     def test_load_from_file_not_found(self):
